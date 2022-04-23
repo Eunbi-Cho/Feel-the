@@ -8,21 +8,39 @@ class GameScene: SKScene {
     var touching: Bool = false
     
     override func didMove(to view: SKView) {
-        let physicsFrame = CGRect(x: 0, y: 50, width: self.frame.size.width, height: self.frame.size.height - 100)
-        self.physicsBody = SKPhysicsBody.init(edgeLoopFrom: physicsFrame)
-        sprite = SKSpriteNode(color: UIColor.red, size: CGSize(width: 50, height: 50))
-        sprite.physicsBody = SKPhysicsBody.init(rectangleOf: sprite.size)
-        sprite.position = CGPoint(x: self.size.width/2.0, y: self.size.height/2.0)
+//        let physicsFrame = CGRect(x: 0, y: 50, width: self.frame.size.width, height: self.frame.size.height - 100)
+//
+//        self.physicsBody = SKPhysicsBody.init(edgeLoopFrom: physicsFrame)
+
+        sprite = SKSpriteNode(imageNamed: "ball")
+        sprite.size = CGSize(width: 50, height: 50)
+        
+        sprite.position = CGPoint(
+            x: CGFloat(Int(arc4random()) & Int(size.width)),
+            y: size.height - sprite.size.height)
+
+        sprite.physicsBody = SKPhysicsBody(circleOfRadius: sprite.size.width/2)
+        
         self.addChild(sprite)
+        
+//        sprite.run(SKAction.repeat(SKAction.sequence([SKAction.run(createBall), SKAction.wait(forDuration: 0.05)]), count: 200))
+        
+        var actionArray = [SKAction]()
+        actionArray.append(SKAction.move(to: CGPoint(
+            x: CGFloat(Int(arc4random()) & Int(size.width)),
+            y: -sprite.size.height), duration: 2))
+        
+        actionArray.append(SKAction.removeFromParent())
+
+        sprite.run(SKAction.sequence(actionArray))
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first!
         let location = touch.location(in:self)
-        if sprite.frame.contains(location) {
-            touchPoint = location
-            touching = true
-        }
+        touchPoint = location
+        sprite.run(SKAction.move(to: CGPoint(x:  location.x, y:location.y), duration: 0.5))
+        touching = true
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -34,6 +52,7 @@ class GameScene: SKScene {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         touching = false
     }
+        
     override func update(_ currentTime: TimeInterval) {
         if touching {
             let dt:CGFloat = 1.0/60.0

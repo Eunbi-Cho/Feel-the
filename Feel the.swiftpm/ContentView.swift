@@ -8,7 +8,6 @@ class GameScene: SKScene {
     var touching: Bool = false
     
     
-    
     override func didMove(to view: SKView) {
         scene!.physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
         run(SKAction.repeat(SKAction.sequence([SKAction.run(createBall), SKAction.wait(forDuration: 0.15)]), count: 5))
@@ -74,6 +73,7 @@ class GameScene: SKScene {
     }
         
     override func update(_ currentTime: TimeInterval) {
+        backgroundColor = UIColor.black
         if touching {
 //            let dt:CGFloat = 1.0/60.0
 //            let distance = CGVector(dx: touchPoint.x - sprite.position.x, dy: touchPoint.y - sprite.position.y)
@@ -87,17 +87,31 @@ class GameScene: SKScene {
 
 
 struct ContentView: View {
+    @Environment(\.presentationMode) var presentationMode
+
+    
     var scene: SKScene {
         let scene = GameScene()
-        scene.size = CGSize(width: 900, height: 1200)
+        scene.size = CGSize(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
         scene.scaleMode = .fill
         return scene
     }
     
     var body: some View {
-        HStack {
-            SpriteView(scene: scene)
-                .frame(width: 900, height: 1200)
+        ZStack{
+            Color(.black)
+                .ignoresSafeArea()
+            VStack {
+                Spacer()
+                    .frame(height: 40.0)
+                HStack {
+                    Spacer()
+                    Button(action:{presentationMode.wrappedValue.dismiss()}){Image(systemName: "xmark").foregroundColor(.white)}.padding(.trailing, 20.0).padding(.top , 40).buttonStyle(BorderlessButtonStyle())
+                }
+                
+                SpriteView(scene: scene)
+                    .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
+            }
         }
     }
 }

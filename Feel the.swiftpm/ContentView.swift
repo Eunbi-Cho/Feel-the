@@ -10,7 +10,8 @@ class GameScene: SKScene {
     
     
     override func didMove(to view: SKView) {
-        run(SKAction.repeat(SKAction.sequence([SKAction.run(createBall), SKAction.wait(forDuration: 0.05)]), count: 200))
+        scene!.physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
+        run(SKAction.repeat(SKAction.sequence([SKAction.run(createBall), SKAction.wait(forDuration: 0.15)]), count: 1000))
     }
     
     func createBall() {
@@ -20,7 +21,7 @@ class GameScene: SKScene {
         sprite.position = CGPoint(
             x: CGFloat(Int(arc4random()) & Int(size.width)),
             y: size.height - sprite.size.height)
-
+        
         sprite.physicsBody = SKPhysicsBody(circleOfRadius: sprite.size.width/2)
         
         self.addChild(sprite)
@@ -30,7 +31,7 @@ class GameScene: SKScene {
         actionArray.append(SKAction.move(to: CGPoint(
             x: CGFloat(Int(arc4random()) & Int(size.width)),
             y: -sprite.size.height), duration: 2))
-        
+
         actionArray.append(SKAction.removeFromParent())
 
         sprite.run(SKAction.sequence(actionArray))
@@ -45,9 +46,11 @@ class GameScene: SKScene {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch = touches.first!
-        let location = touch.location(in: self)
-        touchPoint = location
+        for touch in touches {
+            let location = touch.location(in: self)
+            sprite.position.x = location.x
+            sprite.position.y = location.y
+        }
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -56,10 +59,12 @@ class GameScene: SKScene {
         
     override func update(_ currentTime: TimeInterval) {
         if touching {
-            let dt:CGFloat = 1.0/60.0
-            let distance = CGVector(dx: touchPoint.x-sprite.position.x, dy: touchPoint.y-sprite.position.y)
-            let velocity = CGVector(dx: distance.dx/dt, dy: distance.dy/dt)
-            sprite.physicsBody!.velocity=velocity
+//            let dt:CGFloat = 1.0/60.0
+//            let distance = CGVector(dx: touchPoint.x - sprite.position.x, dy: touchPoint.y - sprite.position.y)
+//            let velocity = CGVector(dx: distance.dx/dt, dy: distance.dy/dt)
+//            sprite.physicsBody!.velocity = velocity
+            sprite.physicsBody!.velocity = CGVector(dx: 0, dy: 1)
+        print("update")
         }
     }
 }
@@ -68,7 +73,7 @@ class GameScene: SKScene {
 struct ContentView: View {
     var scene: SKScene {
         let scene = GameScene()
-        scene.size = CGSize(width: 900, height: 1200)
+        scene.size = CGSize(width: 900, height: 1500)
         scene.scaleMode = .fill
         return scene
     }
@@ -76,7 +81,7 @@ struct ContentView: View {
     var body: some View {
         HStack {
             SpriteView(scene: scene)
-                .frame(width: 900, height: 1200)
+                .frame(width: 900, height: 1500)
         }
     }
 }

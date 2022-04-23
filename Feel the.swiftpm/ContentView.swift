@@ -7,11 +7,13 @@ class GameScene: SKScene {
     var touchPoint: CGPoint = CGPoint()
     var touching: Bool = false
     
+    
+    
     override func didMove(to view: SKView) {
-//        let physicsFrame = CGRect(x: 0, y: 50, width: self.frame.size.width, height: self.frame.size.height - 100)
-//
-//        self.physicsBody = SKPhysicsBody.init(edgeLoopFrom: physicsFrame)
-
+        run(SKAction.repeat(SKAction.sequence([SKAction.run(createBall), SKAction.wait(forDuration: 0.05)]), count: 200))
+    }
+    
+    func createBall() {
         sprite = SKSpriteNode(imageNamed: "ball")
         sprite.size = CGSize(width: 50, height: 50)
         
@@ -22,8 +24,7 @@ class GameScene: SKScene {
         sprite.physicsBody = SKPhysicsBody(circleOfRadius: sprite.size.width/2)
         
         self.addChild(sprite)
-        
-//        sprite.run(SKAction.repeat(SKAction.sequence([SKAction.run(createBall), SKAction.wait(forDuration: 0.05)]), count: 200))
+    
         
         var actionArray = [SKAction]()
         actionArray.append(SKAction.move(to: CGPoint(

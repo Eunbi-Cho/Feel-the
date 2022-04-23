@@ -11,12 +11,12 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         scene!.physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
-        run(SKAction.repeat(SKAction.sequence([SKAction.run(createBall), SKAction.wait(forDuration: 0.15)]), count: 2))
+        run(SKAction.repeat(SKAction.sequence([SKAction.run(createBall), SKAction.wait(forDuration: 0.15)]), count: 5))
     }
 
     
     func createBall() {
-        let sprite = SKSpriteNode(imageNamed: "ball")
+        sprite = SKSpriteNode(imageNamed: "ball")
         sprite.size = CGSize(width: 50, height: 50)
         
         sprite.position = CGPoint(

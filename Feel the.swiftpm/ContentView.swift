@@ -10,7 +10,7 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         scene!.physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
-        run(SKAction.repeat(SKAction.sequence([SKAction.run(createBall), SKAction.wait(forDuration: 0.15)]), count: 30))
+        run(SKAction.repeat(SKAction.sequence([SKAction.run(createBall), SKAction.wait(forDuration: 0.15)]), count: 100))
     }
 
     
@@ -98,14 +98,17 @@ struct ContentView: View {
     }
     
     var body: some View {
-        NavigationView {
+//        NavigationView {
             ZStack{
+                NavigationView {
                 Color(.black)
                     .ignoresSafeArea()
                     
-                    SpriteView(scene: scene)
-                        .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
+//                    SpriteView(scene: scene)
+//                        .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
                 }
+                SpriteView(scene: scene)
+                    .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
             }
             .navigationViewStyle(StackNavigationViewStyle())
             .navigationBarBackButtonHidden(true)

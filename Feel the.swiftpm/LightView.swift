@@ -72,14 +72,17 @@ struct LightView: View {
             SpriteView(scene: scene)
                 .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
             
-            Text("Find the Exit, and Tap")
+            Text("Find the EXIT, and Tap")
                 .foregroundColor(.black)
-            Button(action:{presentationMode.wrappedValue.dismiss()}){Image(systemName: "xmark").foregroundColor(.black)}
-                .frame(width: 60, height: 60)
+            Button(action:{presentationMode.wrappedValue.dismiss()}){
+                Text("EXIT")
+//                Image(systemName: "xmark")
+                .foregroundColor(.black)}
+                .frame(width: 200, height: 100)
                 .buttonStyle(BorderlessButtonStyle())
                 .position(CGPoint(
-                    x: .random(in: 0...UIScreen.main.bounds.size.width),
-                    y: .random(in: 0...UIScreen.main.bounds.size.height)))
+                    x: .random(in: 0...UIScreen.main.bounds.size.width/2),
+                    y: .random(in: 0...UIScreen.main.bounds.size.height/2)))
         }
     }
 

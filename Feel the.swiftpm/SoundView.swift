@@ -82,28 +82,30 @@ struct SoundView: View {
 
     
     var body: some View {
-        
+        NavigationView{
         ZStack{
             Color(.white)
                 .ignoresSafeArea()
             VStack {
-                Spacer()
-                    .frame(height: 20.0)
-                HStack {
-                    Spacer()
-                    Button(action:{presentationMode.wrappedValue.dismiss()}){Image(systemName: "xmark").foregroundColor(.black)}.padding(.trailing, 20.0).buttonStyle(BorderlessButtonStyle())
-                }
-                Spacer()
                 Text("Come Closer")
-                    .onAppear() {
-                        self.activateProximitySensor()
-                        SoundManager.instance.playSound(sound: .come)
-//                    }.onDisappear() {
-//                        SoundManager.instance.playSound(sound: .go)
-//                        self.deactivateProximitySensor()
+                        .onAppear() {
+                            self.activateProximitySensor()
+    //                        SoundManager.instance.playSound(sound: .come)
+    //                    }.onDisappear() {
+    //                        SoundManager.instance.playSound(sound: .go)
+    //                        self.deactivateProximitySensor()
                     }
                 Spacer()
             }
         }
+        }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(trailing: Button(action: {
+            presentationMode.wrappedValue.dismiss()
+        }, label: {
+            Image(systemName: "xmark")
+                .foregroundColor(.black)
+        }
+    ))
     }
 }

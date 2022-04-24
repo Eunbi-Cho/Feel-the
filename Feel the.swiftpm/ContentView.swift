@@ -10,7 +10,7 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         scene!.physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
-        run(SKAction.repeat(SKAction.sequence([SKAction.run(createBall), SKAction.wait(forDuration: 0.15)]), count: 5))
+        run(SKAction.repeat(SKAction.sequence([SKAction.run(createBall), SKAction.wait(forDuration: 0.15)]), count: 30))
     }
 
     
@@ -98,20 +98,23 @@ struct ContentView: View {
     }
     
     var body: some View {
-        ZStack{
-            Color(.black)
-                .ignoresSafeArea()
-            VStack {
-                Spacer()
-                    .frame(height: 40.0)
-                HStack {
-                    Spacer()
-                    Button(action:{presentationMode.wrappedValue.dismiss()}){Image(systemName: "xmark").foregroundColor(.white)}.padding(.trailing, 20.0).padding(.top , 40).buttonStyle(BorderlessButtonStyle())
+        NavigationView {
+            ZStack{
+                Color(.black)
+                    .ignoresSafeArea()
+                    
+                    SpriteView(scene: scene)
+                        .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
                 }
-                
-                SpriteView(scene: scene)
-                    .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(trailing: Button(action: {
+                presentationMode.wrappedValue.dismiss()
+            }, label: {
+                Image(systemName: "xmark")
+                    .foregroundColor(.white)
             }
-        }
+        ))
     }
 }
+}
+

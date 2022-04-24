@@ -88,6 +88,7 @@ struct SoundView: View {
                 .ignoresSafeArea()
             VStack {
                 Text("Come Closer")
+                    .foregroundColor(.black)
                         .onAppear() {
                             self.activateProximitySensor()
     //                        SoundManager.instance.playSound(sound: .come)
@@ -99,6 +100,7 @@ struct SoundView: View {
             }
         }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(trailing: Button(action: {
             presentationMode.wrappedValue.dismiss()

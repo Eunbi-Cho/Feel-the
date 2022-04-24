@@ -26,9 +26,10 @@ class LightScene: SKScene {
         let location = touch.location(in:self)
         touchPoint = location
         player = SKSpriteNode(imageNamed: "light")
-        player.size = CGSize(width: 100, height: 100)
+        player.size = CGSize(width: 200, height: 200)
         self.addChild(player)
-        player.position = location
+        player.position.x = location.x
+        player.position.y = location.y + 50
         touching = true
     }
     
@@ -36,7 +37,7 @@ class LightScene: SKScene {
         for touch in touches {
             let location = touch.location(in:self)
             player.position.x = location.x
-            player.position.y = location.y
+            player.position.y = location.y + 50
         }
     }
 
@@ -65,7 +66,6 @@ struct LightView: View {
     }
     
     var body: some View {
-        NavigationView {
         ZStack {
             Color(.black)
                 .ignoresSafeArea()
@@ -74,11 +74,12 @@ struct LightView: View {
             
             Text("Find the Exit, and Tap")
                 .foregroundColor(.black)
-            Button(action:{presentationMode.wrappedValue.dismiss()}){Image(systemName: "xmark").foregroundColor(.black)}.padding().buttonStyle(BorderlessButtonStyle())
+            Button(action:{presentationMode.wrappedValue.dismiss()}){Image(systemName: "xmark").foregroundColor(.black)}
+                .frame(width: 60, height: 60)
+                .buttonStyle(BorderlessButtonStyle())
                 .position(CGPoint(
                     x: .random(in: 0...UIScreen.main.bounds.size.width),
                     y: .random(in: 0...UIScreen.main.bounds.size.height)))
-        }
         }
     }
 

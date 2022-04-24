@@ -9,8 +9,7 @@ import Foundation
 import SwiftUI
 
 struct Main: View {
-//    @State private var isPresented = false
-    
+    @State private var isPresented = false
     var body: some View {
         
 //                Button(action: { isPresented.toggle();}) {
@@ -32,28 +31,33 @@ struct Main: View {
                     ZStack {
                         Color(.black)
                             .ignoresSafeArea()
-                        ScrollView(.horizontal) {
-                            HStack(alignment: .center, spacing: 50) {
+                        VStack {
                         NavigationLink(destination: ContentView()) {
                                             Text("Feel the Gravity")
                                 .foregroundColor(.white)
                         }
-                        .frame(width: 200, height: 300, alignment: .center)
                         .cornerRadius(10)
                         .foregroundColor(.white)
-                                
+                        Spacer()
+                        .frame(height:40)
                         NavigationLink(destination: SoundView()) {
                                             Text("Feel the Sound")
                                 .foregroundColor(.white)
                         }
-                        .frame(width: 200, height: 300, alignment: .center)
-                            Spacer()
-                                .frame(height:100)
-                            }
+                        Spacer()
+                        .frame(height:40)
+                                
+                        Button(action: { isPresented.toggle(); }) {Text("Feel the Light")}
+                            .fullScreenCover(isPresented: $isPresented, content: {LightView()})
+                            .foregroundColor(.white)
+                                
+                        Spacer()
+                        .frame(height:100)
+                                
                         }
-                
                     }
-                }
+                }.navigationViewStyle(StackNavigationViewStyle())
+            }
         }
-    }
+
 

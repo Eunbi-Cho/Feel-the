@@ -106,6 +106,8 @@ struct ContentView: View {
                     SpriteView(scene: scene)
                         .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
                 }
+            }
+            .navigationViewStyle(StackNavigationViewStyle())
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(trailing: Button(action: {
                 presentationMode.wrappedValue.dismiss()
@@ -115,6 +117,5 @@ struct ContentView: View {
             }
         ))
     }
-}
 }
 

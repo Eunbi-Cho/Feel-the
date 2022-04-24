@@ -15,14 +15,24 @@ struct Main: View {
         ZStack {
             Color(.black)
                 .ignoresSafeArea()
-            Button(action: { isPresented.toggle();}) {
-                            Text("Feel the Gravity")
-                        }
-                        .fullScreenCover(isPresented: $isPresented, content: {ContentView()})
-                        .padding(.horizontal, 30.0)
-                        .frame(height: 60.0)
-                        .foregroundColor(.white)
+            VStack {
+                Button(action: { isPresented.toggle();}) {
+                                Text("Feel the Gravity")
+                            }
+                            .fullScreenCover(isPresented: $isPresented, content: {ContentView()})
+                            .padding(.horizontal, 30.0)
+                            .frame(height: 60.0)
+                            .foregroundColor(.white)
+                
+                Button(action: { isPresented.toggle();}) {
+                                Text("Feel the Sound")
+                            }
+                            .fullScreenCover(isPresented: $isPresented, content: {SoundView()})
+                            .padding(.horizontal, 30.0)
+                            .frame(height: 60.0)
+                            .foregroundColor(.white)
                     }
+                }
         }
     }
 

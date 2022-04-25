@@ -32,27 +32,45 @@ struct Main: View {
                         Color(.black)
                             .ignoresSafeArea()
                         VStack {
-                        NavigationLink(destination: ContentView()) {
-                                            Text("Feel the Gravity")
+                            Text("Feel.")
+                                .font(.title)
+                                .fontWeight(.black)
                                 .foregroundColor(.white)
-                        }
-                        .cornerRadius(10)
-                        .foregroundColor(.white)
-                        Spacer()
-                        .frame(height:40)
-                        NavigationLink(destination: SoundView()) {
-                                            Text("Feel the Sound")
-                                .foregroundColor(.white)
-                        }
-                        Spacer()
-                        .frame(height:40)
-                                
-                        Button(action: { isPresented.toggle(); }) {Text("Feel the Light")}
-                            .fullScreenCover(isPresented: $isPresented, content: {LightView()})
+                                .fontWeight(.black)
+                            Spacer()
+                                .frame(height: 150)
+                            NavigationLink(destination: ContentView()) {
+                                                Text("Feel the Gravity")
+                                    .foregroundColor(.white)
+                            }
+                            .padding(.bottom, 20.0)
+                            .cornerRadius(10)
                             .foregroundColor(.white)
-                                
-                        Spacer()
-                        .frame(height:100)
+                            Divider()
+                                .background(.gray)
+                                .frame(width: 200)
+                            
+                            Spacer()
+                            .frame(height:40)
+                            NavigationLink(destination: SoundView()) {
+                                                Text("Feel the Sound")
+                                    .foregroundColor(.white)
+                            }
+                            .padding(.bottom, 25.0)
+                            
+                            Divider()
+                                .background(.gray)
+                                .frame(width: 200)
+                            
+                            Spacer()
+                            .frame(height:40)
+                                    
+                            Button(action: { isPresented.toggle(); }) {Text("Feel the Light")}
+                                .fullScreenCover(isPresented: $isPresented, content: {LightView()})
+                                .foregroundColor(.white)
+                            
+                            Spacer()
+                            .frame(height:300)
                                 
                         }
                     }

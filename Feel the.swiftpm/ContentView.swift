@@ -7,7 +7,6 @@ class GameScene: SKScene {
     var touchPoint: CGPoint = CGPoint()
     var touching: Bool = false
     
-    
     override func didMove(to view: SKView) {
         scene!.physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
         run(SKAction.repeat(SKAction.sequence([SKAction.run(createBall), SKAction.wait(forDuration: 0.15)]), count: 100))
@@ -22,7 +21,7 @@ class GameScene: SKScene {
             x: CGFloat(Int(arc4random()) & Int(size.width)),
             y: size.height - sprite.size.height)
         
-        sprite.physicsBody = SKPhysicsBody(circleOfRadius: sprite.size.width/2)
+        sprite.physicsBody = SKPhysicsBody(circleOfRadius: sprite.size.width/1.8)
         
         self.addChild(sprite)
     
@@ -56,15 +55,21 @@ class GameScene: SKScene {
 //
 //        sprite.run(SKAction.sequence(actionArray))
 //
-        sprite.run(SKAction.move(to: CGPoint(x:  location.x, y:location.y), duration: 0.1))
+        for sprite in self.nodes(at: CGPoint(x: .random(in: 0...UIScreen.main.bounds.size.width), y: .random(in: 0...UIScreen.main.bounds.size.height))) {
+            
+            sprite.run(SKAction.move(to: CGPoint(x:  location.x, y:location.y), duration: 0.1))
+            
+        }
         touching = true
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in:self)
+            for sprite in self.nodes(at: CGPoint(x: .random(in: 0...UIScreen.main.bounds.size.width), y: .random(in: 0...UIScreen.main.bounds.size.height))) {
             sprite.position.x = location.x
             sprite.position.y = location.y
+            }
         }
     }
 

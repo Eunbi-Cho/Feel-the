@@ -84,19 +84,26 @@ struct SoundView: View {
     var body: some View {
         NavigationView{
         ZStack{
-            Color(.white)
+            Color(.black)
                 .ignoresSafeArea()
             VStack {
-                Text("Come Closer")
-                    .foregroundColor(.black)
-                        .onAppear() {
-                            self.activateProximitySensor()
+                Text("Please Turn on the Sound")
+                    .foregroundColor(.white)
+                    
+                Spacer()
+                    .frame(height:200)
+                Image("comecloser")
+                    .resizable()
+                    .frame(width: 200, height: 200)
+                    .onAppear() {
+                        self.activateProximitySensor()
     //                        SoundManager.instance.playSound(sound: .come)
     //                    }.onDisappear() {
     //                        SoundManager.instance.playSound(sound: .go)
     //                        self.deactivateProximitySensor()
                     }
                 Spacer()
+                    .frame(height:400)
             }
         }
         }
@@ -106,7 +113,8 @@ struct SoundView: View {
             presentationMode.wrappedValue.dismiss()
         }, label: {
             Image(systemName: "xmark")
-                .foregroundColor(.black)
+                .foregroundColor(.white)
+                .padding(.top, 10.0)
         }
     ))
     }

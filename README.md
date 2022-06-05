@@ -4,8 +4,6 @@
 https://user-images.githubusercontent.com/98628614/172054321-ecf2407e-29b3-4bc0-add3-6e293ce0a53e.mp4
 
 
-## 3️⃣ Features
-
 ## 🪐 Feel the Gravity
 It is a work that allows you to form gravity around your fingers when the ball is falling. The Sprite kit provided physical gravity to the ball.
 <img width="200" alt="IMG_0622" src="https://user-images.githubusercontent.com/98628614/172054369-a251a840-f66a-4ad0-bdf1-8c169613367b.PNG">
